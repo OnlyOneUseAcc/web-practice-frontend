@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ПОГОДА ЗДЕСЬ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/script.js"></script>
+    <script src="js/geolocation.js"></script>
+    <script src="js/fetch.js"></script>
+    <script src="js/printCities.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/addCity.js"></script>
+    <script src="js/deleteCity.js"></script>
+</head>
+<body onload="citiesFromStorage(); getPosition()">
+<header>
+    <h1 id="mainHeader">Погода здесь</h1>
+    <div id="headerButton">
+        <button onclick="updateGeolocation()">Обновить геолокацию</button>
+    </div>
+</header>
+<main>
+    <section class="city" id="city">
+        <div class="currentCity" id="currentCity">
+            <h2 class="name">Загрузка...</h2>
+            <div id="currentCityImgTemp">
+                <img src="image/reload.svg" alt="reload">
+                <p class="temp"></p>
+            </div>
+        </div>
+        <section class="cityList" id="cityList">
+            <ul class="list">
+                <li>
+                    <p>Ветер</p>
+                    <p class="wind"></p>
+                </li>
+                <li>
+                    <p>Ощущается как</p>
+                    <p class="feels-like"></p>
+                </li>
+                <li>
+                    <p>Давление</p>
+                    <p class="pressure"></p>
+                </li>
+                <li>
+                    <p>Влажность</p>
+                    <p class="humidity"></p>
+                </li>
+                <li>
+                    <p>Координаты</p>
+                    <p class="coords"></p>
+                </li>
+            </ul>
+        </section>
+    </section>
+
+    <section class="cities">
+        <h2>Избранное</h2>
+        <div id="newCity">
+            <form onsubmit="return false">
+                <label>
+                    <input type="text" class="search" placeholder="Добавить новый город">
+                </label>
+                <button onclick="addCity()">+</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<template class="templateCity" id="templateCity">
+    <section class="sectionCity">
+        <div class="headerCity">
+            <h3 class="name">Загрузка...</h3>
+            <p class="temp"></p>
+            <img src="image/reload.svg" alt="reload">
+            <button onclick="deleteCity(this)">×</button>
+        </div>
+        <div class="otherList">
+            <ul class="list">
+                <li>
+                    <p>Ветер</p>
+                    <p class="wind"></p>
+                </li>
+                <li>
+                    <p>Облачность</p>
+                    <p class="feels-like"></p>
+                </li>
+                <li>
+                    <p>Давление</p>
+                    <p class="pressure"></p>
+                </li>
+                <li>
+                    <p>Влажность</p>
+                    <p class="humidity"></p>
+                </li>
+                <li>
+                    <p>Координаты</p>
+                    <p class="coords"></p>
+                </li>
+            </ul>
+        </div>
+    </section>
+</template>
+<template class="templateLoading">
+    <section class="loadingOtherCity" id="loadingOtherCity">
+        <p>Подождите, данные загружаются</p>
+        <button onclick="updateGeolocation()"></button>
+    </section>
+</template>
+</body>
+</html>
